@@ -1,24 +1,20 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-//Routing
-// import PrivateRoute from './components/routing/PrivateRoute'
-
-//screens
-// import LoginScreen from './components/views/LoginScreen';
-// import RegisterScreen from './components/views/RegisterScreen';
-// import Home from './components/views/Home';
+import LoginScreen from './Components/Login/Signin';
+import RegisterScreen from './Components/Register/Signup';
+import Home from './Components/Home/Home';
+import './App.css'
 
 function App() {
   return (
     <Router>
     <div className="App">
-        <Switch>
-          {/* 
-            <Route exact path = "/home" component={Home}/>
-            <Route exact path="/login" component={LoginScreen}/>
-            <Route exact path="/register" component={RegisterScreen}/> 
-          */}
-        </Switch>
+        <Routes>
+
+            <Route exact path="/" element={<Home/>}/>
+            <Route exact path="/login" element={<LoginScreen/>}/>
+            <Route exact path="/register" element={<RegisterScreen/>}/>
+        </Routes>
     </div>
     </Router>
   );

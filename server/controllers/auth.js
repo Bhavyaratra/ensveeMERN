@@ -2,6 +2,7 @@ const User = require('../models/User')
 
 const register = async (req,res) =>{
             //taking data from req body
+
     const {usid,emid,pswd} = req.body;
 
     try{
@@ -40,6 +41,7 @@ const login =async (req,res) =>{
                 success: false,
                 error: "Invalid Credentials"
             })
+            return
         }
                                 //takes password from body
         const isMatch =  pswd === user.pswd ? true : false
@@ -49,16 +51,18 @@ const login =async (req,res) =>{
                 success: false,
                 error:"Invalid Credentials"
             })
+            return
         }else{
         
-        res.status(200).json({
-            success: true,
-            data: user,
-        });
-    }
+            res.status(200).json({
+                success: true,
+                data: {emid:user.emid,usid:user.usid},
+            });
+            return
+        }
 
     }catch(err){
-    
+        console.log(err.message)
         res.status(500).json({
             success: false,
             error: err.message
@@ -67,5 +71,19 @@ const login =async (req,res) =>{
 
 };
 
+const getUsers =async (req,res)=>{
+    User.find().sort({createdAt: -1})
+    .then((result)=>{
+          res.status(200).json({
+                success: true,
+                data: result,
+            });
+            return
+    })
+    .catch((err)=>{
+        res.send('400'+err);
+    })
+}
 
-module.exports = {register, login}
+
+module.exports = {register, login, getUsers}
