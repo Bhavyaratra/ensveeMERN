@@ -45,14 +45,15 @@ export default function Home(){
                     getAllUsers(e)
                 }}>Get All Users</button>
 
-                {users ? <h3>All Users</h3>:<span></span>}
-
-                {users && users.map((user)=>(
+                {users? <h3>All Users</h3>:<span></span>}
+                <div>
+                {users && users.map((user,i)=>(
                         <div>
-                            <p>{user.usid}</p>
-                            <br/>
+                            <p key={i}>{user.usid}</p>
                         </div>
                 ))}
+                </div>
+               
         </div>
     </>)
 
